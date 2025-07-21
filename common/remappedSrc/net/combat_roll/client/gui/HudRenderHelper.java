@@ -1,16 +1,24 @@
 package net.combat_roll.client.gui;
 
+import I;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.combat_roll.client.CombatRollClient;
 import net.combat_roll.client.Keybindings;
+import net.combat_roll.client.gui.Drawable.Anchor;
+import net.combat_roll.client.gui.Drawable.Component;
+import net.combat_roll.client.gui.HudRenderHelper.ViewModel.Element;
+import net.combat_roll.config.ClientConfig;
 import net.combat_roll.internals.RollManager;
+import net.combat_roll.internals.RollManager.CooldownInfo;
 import net.combat_roll.internals.RollingEntity;
 import net.combat_roll.mixin.client.KeybindingAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec2f;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -72,7 +80,8 @@ public class HudRenderHelper {
             u = 0;
             v = 0;
             width = height = textureSize = 15;
-            context.drawTexture(RenderLayer::getGuiTextured, ARROW_BACKGROUND, x, y, u, v, width, height, textureSize, textureSize);
+            context.setShaderColor(1, 1, 1, ((float)config.hudBackgroundOpacity) / 100F);
+            context.drawTexture(ARROW_BACKGROUND, x, y, u, v, width, height, textureSize, textureSize);
 
             var color = element.color;
             float red = ((float) ((color >> 16) & 0xFF)) / 255F;
@@ -88,7 +97,9 @@ public class HudRenderHelper {
             y = drawY + textureSize - height + shift;
             u = 0;
             v = textureSize - height;
-            context.drawTexture(RenderLayer::getGuiTextured, ARROW, x, y, u, v, width, height, textureSize, textureSize);
+            context.setShaderColor(red, green, blue, element.full);
+            context.drawTexture(ARROW, x, y, u, v, width, height, textureSize, textureSize);
+            context.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
             drawnWith += horizontalSpacing;
         }
@@ -119,8 +130,8 @@ public class HudRenderHelper {
                 viewModel.drawable.draw(context, keybindingX, keybindingY, iconHAnchor, iconVAnchor);
             } else if (viewModel.label != null) {
                 var label = viewModel.label;
-                int textLength = textRenderer.getWidth(label);
-                int buttonLength = textLength + HudKeyVisuals.buttonLeading.draw().width() + HudKeyVisuals.buttonTrailing.draw().width();
+                var textLength = textRenderer.getWidth(label);
+                var buttonLength = textLength + HudKeyVisuals.buttonLeading.draw().width() + HudKeyVisuals.buttonTrailing.draw().width();
                 if (iconHAnchor == Drawable.Anchor.TRAILING) {
                     keybindingX -= buttonLength / 2;
                 }
@@ -129,10 +140,10 @@ public class HudRenderHelper {
                 HudKeyVisuals.buttonCenter.drawFlexibleWidth(context, keybindingX - (textLength / 2), keybindingY, textLength, iconVAnchor);
                 HudKeyVisuals.buttonTrailing.draw(context, keybindingX + (textLength / 2), keybindingY, Drawable.Anchor.LEADING, iconVAnchor);
 
-                int textHeight = textRenderer.fontHeight + 1; // +1 for shadow
-                int textY = keybindingY;
+                var textHeight = textRenderer.fontHeight + 1; // +1 for shadow
+                var textY = keybindingY;
                 switch (iconVAnchor) {
-                    case LEADING -> { /* textY stays the same */ }
+                    case LEADING -> textY = textY;
                     case TRAILING -> textY -= textHeight;
                     case CENTER -> textY -= (textHeight / 2 - 1);
                 }

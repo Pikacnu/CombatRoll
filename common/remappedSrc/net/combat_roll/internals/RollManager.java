@@ -1,5 +1,6 @@
 package net.combat_roll.internals;
 
+import F;
 import net.combat_roll.CombatRollMod;
 import net.combat_roll.api.CombatRoll;
 import net.combat_roll.client.CombatRollClient;
@@ -9,6 +10,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class RollManager {
@@ -36,7 +38,7 @@ public class RollManager {
                 && availableRolls > 0
                 && !((PlayerEntityAccessor)player).invokeIsImmobile_combat_roll()
                 && player.canMoveVoluntarily()
-                && player.getAttributeValue(EntityAttributes.MOVEMENT_SPEED) > 0;
+                && player.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) > 0;
     }
 
     public boolean isRolling() {

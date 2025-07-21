@@ -1,45 +1,35 @@
 {
-  "schemaVersion": 1,
-  "id": "combat_roll",
-  "version": "${version}",
-  "name": "Combat Roll",
-  "description": "Adds combat roll ability, with related attributes and enchantments.",
-  "authors": [
-    "Daedelus"
-  ],
-  "contact": {
-    "repo": "https://github.com/ZsoltMolnarrr/combat_roll",
-    "issues": "https://github.com/ZsoltMolnarrr/combat_roll/issues"
-  },
-  "license": "GPL-3.0",
-  "icon": "icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "client": [
-      "net.combat_roll.fabric.client.CombatRollClientModFabric"
-    ],
-    "main": [
-      "net.combat_roll.fabric.CombatRollModFabric"
-    ],
-    "modmenu": [
-      "net.combat_roll.fabric.client.ModMenuIntegration"
-    ]
-  },
-  "mixins": [
-    "combat_roll.mixins.json"
-  ],
-  "depends": {
-    "minecraft": ">=1.20.3",
-    "fabricloader": ">=0.14.0",
-    "fabric-api": "*",
-    "cloth-config": ">=11.0.0",
-    "playeranimator": ">=1.9.0"
-  },
-  "custom": {
-    "modmenu": {
-      "links": {
-        "modmenu.discord": "https://discord.gg/KN9b3pjFTM"
-      }
-    }
-  }
+	"schemaVersion": 1,
+	"id": "combat_roll",
+	"version": "${version}",
+	"name": "Combat Roll",
+	"description": "Adds combat roll ability, with related attributes and enchantments.",
+	"authors": ["Daedelus"],
+	"contact": {
+		"repo": "https://github.com/ZsoltMolnarrr/combat_roll",
+		"issues": "https://github.com/ZsoltMolnarrr/combat_roll/issues"
+	},
+	"license": "GPL-3.0",
+	"icon": "icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": ["net.combat_roll.fabric.client.CombatRollClientModFabric"],
+		"main": ["net.combat_roll.fabric.CombatRollModFabric"],
+		"modmenu": ["net.combat_roll.fabric.client.ModMenuIntegration"]
+	},
+	"mixins": ["combat_roll.mixins.json"],
+	"depends": {
+		"minecraft": ">=1.21.4",
+		"fabricloader": ">=0.16.0",
+		"fabric-api": "*",
+		"cloth-config": ">=15.0.0",
+		"playeranimator": ">=2.0.0"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/KN9b3pjFTM"
+			}
+		}
+	}
 }

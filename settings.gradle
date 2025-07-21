@@ -11,4 +11,3 @@ rootProject.name = 'combat_roll'
 
 include 'common'
 include 'fabric'
-include 'neoforge'

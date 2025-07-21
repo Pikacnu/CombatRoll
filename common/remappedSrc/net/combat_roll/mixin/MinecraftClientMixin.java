@@ -5,8 +5,11 @@ import net.combat_roll.Platform;
 import net.combat_roll.api.CombatRoll;
 import net.combat_roll.client.Keybindings;
 import net.combat_roll.client.RollEffect;
+import net.combat_roll.client.RollEffect.Visuals;
+import net.combat_roll.internals.RollManager;
 import net.combat_roll.internals.RollingEntity;
 import net.combat_roll.network.Packets;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -21,6 +24,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.combat_roll.client.RollEffect.Particles.PUFF;
+
+import D;
+import F;
 
 @Mixin(value = MinecraftClient.class, priority = 449)
 public abstract class MinecraftClientMixin {

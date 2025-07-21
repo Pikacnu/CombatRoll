@@ -57,7 +57,6 @@ dependencies {
     shadowBundle(implementation ("com.github.ZsoltMolnarrr:TinyConfig:${project.tiny_config_version}"))
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.mod_menu_version}") { transitive false }
-    modCompileOnly("maven.modrinth:better-combat:${rootProject.better_combat_version}-fabric")
 }
 
 processResources {
